@@ -3,13 +3,15 @@ package com.keshar.dagger2example.Car;
 import android.util.Log;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 public class DiseleEngine implements Engines {
     private static final String TAG = "Car";
 
     private int horsePower;
 
-    public DiseleEngine(int horsePower) {
+    @Inject
+    public DiseleEngine(@Named("horse power") int horsePower) {
         this.horsePower = horsePower;
     }
 
