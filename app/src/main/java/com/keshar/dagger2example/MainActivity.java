@@ -5,29 +5,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.keshar.dagger2example.Car.Car;
-import com.keshar.dagger2example.Dagger.CarComponent;
-import com.keshar.dagger2example.Dagger.DaggerCarComponent;
-import com.keshar.dagger2example.Dagger.DisileEngineModule;
+import com.keshar.dagger2example.Dagger.ActivityComponent;
+import com.keshar.dagger2example.Dagger.DaggerActivityComponent;
 
 import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
 
     @Inject
-    Car car;
+    Car car1, car2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        CarComponent carComponent = DaggerCarComponent.builder().
-                horsePower(100)
-                .engineCapacity(1400)
+        ActivityComponent activityComponent = DaggerActivityComponent.builder().
+                horsePower(120).
+                engineCapacity(1400)
+                .appComponent(((ExampleApp) getApplication()).getComponent())
                 .build();
-        carComponent.injet(this);
-//        car = carComponent.getCar();
+        activityComponent.injet(this);
+//        car = activityComponent.getCar();
 
-        car.drive();
+        car1.drive();
+        car2.drive();
     }
 }

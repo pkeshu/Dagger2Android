@@ -9,12 +9,13 @@ import javax.inject.Named;
 import dagger.BindsInstance;
 import dagger.Component;
 
-@Component(modules = {WheelModule.class, DisileEngineModule.class})
-public interface CarComponent {
+@PerActivity
+@Component(dependencies = AppComponent.class, modules = {WheelModule.class, DisileEngineModule.class})
+public interface ActivityComponent {
 
     Car getCar();
 
-    public void injet(MainActivity mainActivity);
+    void injet(MainActivity mainActivity);
 
     @Component.Builder
     interface Builder {
@@ -27,7 +28,9 @@ public interface CarComponent {
         @BindsInstance
         Builder engineCapacity(@Named("engine capacity") int engineCapacity);
 
-        CarComponent build();
+        Builder appComponent(AppComponent component);
+
+        ActivityComponent build();
     }
 
 
