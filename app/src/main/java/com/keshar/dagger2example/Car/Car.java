@@ -1,4 +1,4 @@
-package com.keshar.dagger2example;
+package com.keshar.dagger2example.Car;
 
 import android.util.Log;
 
@@ -18,7 +18,13 @@ public class Car {
         this.wheel = wheel;
     }
 
+    @Inject
+    public void enabaledRemote(Remote remote) {
+        remote.setOnListerner(this);
+    }
+
     public void drive() {
-        Log.d(TAG, "drive: ....");
+        engines.onStart();
+        Log.d(TAG, "driving: ....");
     }
 }
